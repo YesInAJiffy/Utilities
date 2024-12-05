@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+import sys
 
 
 def is_within_tolerance(color1, color2, tolerance=5):
@@ -56,12 +57,27 @@ def make_transparent_gif(input_gif_path, output_gif_path, transparent_color=(255
         transparency=0  # Set the first color (index 0) as transparent
     )
 
-# Example usage
-input_gif_path = 'superman_updated.gif'  # Path to your input GIF
-base_name, _ = os.path.splitext(input_gif_path)
-output_gif_path = f"{base_name}_updated.gif"
-#transparent_color = (255, 255, 255)  # Color to make transparent (this RGB is for white)
-#transparent_color = (160,178,187)  # Superman image, first run
-transparent_color = (114,127,130)  # Superman image, second run
 
-make_transparent_gif(input_gif_path, output_gif_path, transparent_color, tolerance=30)
+def main():
+    # Check if an argument is provided
+    if len(sys.argv) < 2:
+        print("Usage: python removetransparency.py sample.gif")
+        print("Please provide name of the file.")
+        return
+    
+    # Get the input string
+    input_gif_path = sys.argv[1]
+
+    #input_gif_path = 'return1.gif'  # Path to your input GIF
+    base_name, _ = os.path.splitext(input_gif_path)
+    output_gif_path = f"{base_name}_updated.gif"
+    #transparent_color = (255, 255, 255)  # Color to make transparent (this RGB is for white)
+    #transparent_color = (160,178,187)  # Superman image, first run
+    transparent_color = (114,127,130)  # Superman image, second run
+
+    make_transparent_gif(input_gif_path, output_gif_path, transparent_color, tolerance=30)
+
+    
+
+if __name__ == '__main__':
+    main()
